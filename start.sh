@@ -1,4 +1,4 @@
-git pull && npm start
+git pull && npm i && npm start
 
 sleep 5
 
