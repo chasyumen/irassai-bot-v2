@@ -16,20 +16,34 @@ const client = (global.client = new Client({
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMembers,
         // GatewayIntentBits.GuildBans,
-        GatewayIntentBits.GuildEmojisAndStickers,
+        // GatewayIntentBits.GuildEmojisAndStickers,
         // GatewayIntentBits.GuildIntegrations,
         GatewayIntentBits.GuildWebhooks,
-        GatewayIntentBits.GuildInvites,
+        // GatewayIntentBits.GuildInvites,
         // GatewayIntentBits.GuildVoiceStates,
         // GatewayIntentBits.GuildPresences,
         GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.GuildMessageReactions,
+        // GatewayIntentBits.GuildMessageReactions,
         // GatewayIntentBits.GuildMessageTyping,
         GatewayIntentBits.DirectMessages,
-        GatewayIntentBits.DirectMessageReactions,
+        // GatewayIntentBits.DirectMessageReactions,
         // GatewayIntentBits.DirectMessageTyping,
         // GatewayIntentBits.MessageContent,
     ],
+    makeCache: Options.cacheWithLimits({
+        // Disable most caches entirely
+        MessageManager: 0,
+        GuildMemberManager: {
+            maxSize: 10, // limit guild member cache
+            keepOverLimit: member => member.id === client.user.id // always keep bot user
+        },
+        PresenceManager: 0,
+        UserManager: 0,
+        ThreadManager: 0,
+        ThreadMemberManager: 0,
+        ReactionManager: 0,
+    }),
+    partials: [Partials.GuildMember, Partials.User],
     allowedMentions: { repliedUser: false },
     presence: {
         status: "idle",
