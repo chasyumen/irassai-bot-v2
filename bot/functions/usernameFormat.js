@@ -1,10 +1,10 @@
 module.exports = {
     name: "usernameFormat",
-    run: function (name, tag) {
-        if (tag == "0") {
-            return name;
+    run: function (user) {
+        if (user.discriminator == "0") {
+            return user.displayName;
         } else {
-            return `${name}#${tag}`;
+            return `${user.tag}`;
         }
     }
 }

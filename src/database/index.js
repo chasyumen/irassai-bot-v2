@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const { eachSeries } = require('async')
 
 module.exports = class DataBase {
-    constructor () {this._mongoose = mongoose; this.models = {}; this.cache = {};}
+    constructor () {this._mongoose = mongoose; this.models = {}; this.cache = {}; mongoose.set('strictQuery', false);}
     async connect (...data) {
         return await this._mongoose.connect(...data);
     }

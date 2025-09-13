@@ -1,6 +1,6 @@
 module.exports = {
     name: "ready",
-    event: "ready",
+    event: "clientReady",
     exec: async function () {
         console.log("isReady");
         await this.application.commands.fetch();
