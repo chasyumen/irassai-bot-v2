@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { Client, GatewayIntentBits, Collection } = Discord;
+const { Client, GatewayIntentBits, Collection, Options, Partials } = Discord;
 const { join } = require("path");
 const { readdirSync } = require("fs");
 const mongoose = (global.mongoose = require("mongoose"));
