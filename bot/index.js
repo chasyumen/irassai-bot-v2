@@ -38,7 +38,10 @@ const client = (global.client = new Client({
             keepOverLimit: member => member.id === client.user.id // always keep bot user
         },
         PresenceManager: 0,
-        UserManager: 0,
+        UserManager: {
+            maxSize: 1, // limit guild member cache
+            keepOverLimit: user => user.id === client.user.id // always keep bot user
+        },
         ThreadManager: 0,
         ThreadMemberManager: 0,
         ReactionManager: 0,
