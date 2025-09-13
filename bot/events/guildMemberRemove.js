@@ -22,7 +22,7 @@ module.exports = {
             } else {
                 var channel = member.guild.systemChannel ?? null;
             }
-            var userDisplayname = client.functions.get("usernameFormat").run(user.username, user.discriminator)
+            var userDisplayname = client.functions.get("usernameFormat").run(user)
             // console.log(channel);
             if (!channel) {
                 var logString = `GUILD: \`${member.guild.name} (ID:${member.guild.id})\`, MEMBER: \`${userDisplayname} (ID:${user.id})\`, NOTIFY: \`CHANNEL_NOT_FOUND\``;
