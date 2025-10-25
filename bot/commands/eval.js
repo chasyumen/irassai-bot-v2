@@ -3,7 +3,7 @@ const { inspect } = Util;
 
 module.exports = {
     name: "eval",
-    description: "プログラムを実行します(Bot管理者専用)",
+    description: "Bot管理者専用のコマンドです。",
     category: "config",
     isServerAdminOnly: false,
     isGlobalAdminOnly: true,

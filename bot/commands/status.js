@@ -3,7 +3,7 @@ const osu = require('node-os-utils');
 
 module.exports = {
     name: "status",
-    description: "サーバーの状態を取得します",
+    description: "サーバーの状態を取得します。",
     category: "info",
     isServerAdminOnly: false,
     isGlobalAdminOnly: false,
