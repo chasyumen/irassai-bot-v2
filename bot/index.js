@@ -70,7 +70,7 @@ client.events = new Collection();
 client.interactions = new Collection();
 
 db.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true }).then(async (db_connected) => {
-    console.log("CONNECTED TO DATABASE");
+    console.log("[Bot] Database connection ready");
     await db.load_models();
     await dbCache()
     setInterval(dbCache, 2000);

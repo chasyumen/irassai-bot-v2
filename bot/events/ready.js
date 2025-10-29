@@ -2,7 +2,7 @@ module.exports = {
     name: "ready",
     event: "clientReady",
     exec: async function () {
-        console.log("isReady");
+        console.log("[Bot] Bot ready");
         await this.application.commands.fetch();
         // await async2.eachSeries(client.application.commands.cache, async (cmd) => {
         //     var set = false;
