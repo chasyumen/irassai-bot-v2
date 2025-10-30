@@ -37,29 +37,37 @@ module.exports = {
                 return;
             }
 
-            if (!channel.permissionsFor(member.guild.members.me).has(PermissionFlagsBits.SendMessages)) {
+            if (!channel.permissionsFor(member.guild.members.me).has(PermissionFlagsBits.SendMessages, PermissionFlagsBits.ViewChannel)) {
                 var logString = `GUILD: \`${member.guild.name} (ID:${member.guild.id})\`, MEMBER: \`${userDisplayname} (ID:${user.id})\`, NOTIFY: \`NO_PERMISSION\``;
                 client.emit("addLogQueue", "MEMBER", "LEAVE", new Date(), logString);
                 return;
             }
 
-            var logString = `GUILD: \`${member.guild.name} (ID:${member.guild.id})\`, MEMBER: \`${userDisplayname} (ID:${user.id})\`, NOTIFY: \`ENABLED\``;
+            try {
+                if (serverData.memberJoinNotifyType == "embed") {
+                    await channel.send({
+                        embeds: [{
+                            title: `${userDisplayname}さん... いってらっさい...`,
+                            color: config.colors.default_color,
+                            description: `${user.displayName}${user.displayName == user.username ? `` : ` (${user.username})`}さんが${member.guild.name}から脱退しました...`,
+                            thumbnail: {
+                                url: user.avatarURL({ dynamic: true })
+                            }
+                        }]
+                    });
+                } else {
+                    await channel.send(`${userDisplayname}さん... いってらっさい...`);
+                }
 
-            client.emit("addLogQueue", "MEMBER", "LEAVE", new Date(), logString);
+                var logString = `GUILD: \`${member.guild.name} (ID:${member.guild.id})\`, MEMBER: \`${userDisplayname} (ID:${user.id})\`, NOTIFY: \`ENABLED\``;
 
-            if (serverData.memberJoinNotifyType == "embed") {
-                return await channel.send({
-                    embeds: [{
-                        title: `${userDisplayname}さん... いってらっさい...`,
-                        color: config.colors.default_color,
-                        description: `${user.displayName}${user.displayName == user.username ? `` : ` (${user.username})`}さんが${member.guild.name}から脱退しました...`,
-                        thumbnail: {
-                            url: user.avatarURL({ dynamic: true })
-                        }
-                    }]
-                });
-            } else {
-                return await channel.send(`${userDisplayname}さん... いってらっさい...`);
+                client.emit("addLogQueue", "MEMBER", "LEAVE", new Date(), logString);
+                return;
+            } catch {
+                var logString = `GUILD: \`${member.guild.name} (ID:${member.guild.id})\`, MEMBER: \`${userDisplayname} (ID:${user.id})\`, NOTIFY: \`FAILED\``;
+
+                client.emit("addLogQueue", "MEMBER", "LEAVE", new Date(), logString);
+                return;
             }
         }
     }

@@ -15,7 +15,7 @@ module.exports = {
     },
     exec: async function (interaction, i, res) {
         await res.defer();
-        console.log(await i.guild.getdb());
+        // console.log(await i.guild.getdb());
         if (interaction.options.getSubcommand() == "view") {
             let conf_data = await i.guild.getdb();
             var fieldArray = new Array({
