@@ -1,7 +1,6 @@
 const { readFileSync, readdirSync } = require("fs");
 const { join } = require("path");
 const mongoose = require("mongoose");
-const { eachSeries } = require('async')
 
 module.exports = class DataBase {
     constructor () {this._mongoose = mongoose; this.models = {}; this.cache = {};}
@@ -15,14 +14,5 @@ module.exports = class DataBase {
             this[file.replace(".js", "")] = db;
             this.models[file.replace(".js", "")] = db;
         });
-    }
-
-    async saveCache() {
-        var cache = {};
-        await eachSeries(Object.keys(this.models), async (key) => {
-            cache[key] = await this.models[key].find();
-        });
-        this.cache = cache;
-        return cache;
     }
 }

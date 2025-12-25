@@ -72,11 +72,11 @@ client.interactions = new Collection();
 db.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true }).then(async (db_connected) => {
     console.log("[Bot] Database connection ready");
     await db.load_models();
-    await dbCache()
-    setInterval(dbCache, 2000);
-    async function dbCache() {
-        return await db.saveCache();
-    }
+    // await dbCache()
+    // setInterval(dbCache, 2000);
+    // async function dbCache() {
+    //     return await db.saveCache();
+    // }
     // console.log(db);
 });
 
@@ -121,16 +121,9 @@ setTimeout(() => {
 
 Discord.BaseChannel.prototype.getdb = async function () {
     // console.log(client.db);
-    try {
-        var channelData = this.client.db.cache.channel.find(data => data.channelId == this.id);
-    } catch (error) {
-        var channelData = await this.client.db.models.channel.findOne({
-            channelId: this.id
-        });
-    }
-    // var channelData = await this.client.db.channel.findOne({
-    //     channelId: this.id
-    // });
+    var channelData = await this.client.db.models.channel.findOne({
+        channelId: this.id
+    });
     if (!channelData) {
         channelData = new client.db.channel({
             channelId: this.id
@@ -153,16 +146,9 @@ Discord.BaseChannel.prototype.setdb = async function (data) {
 };
 
 Discord.Guild.prototype.getdb = async function () {
-    try {
-        var guildData = this.client.db.cache.guild.find(data => data.guildId == this.id);
-    } catch (error) {
-        var guildData = await this.client.db.models.guild.findOne({
-            guildId: this.id
-        });
-    }
-    // var guildData = await this.client.db.guild.findOne({
-    //     guildId: this.id
-    // });
+    var guildData = await this.client.db.models.guild.findOne({
+        guildId: this.id
+    });
     if (!guildData) {
         guildData = new client.db.guild({
             guildId: this.id
