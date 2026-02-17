@@ -52,7 +52,7 @@ module.exports = {
                             color: config.colors.default_color,
                             description: `${user.displayName}${user.displayName == user.username ? `` : ` (${user.username})`}さんが${member.guild.name}に参加しました！`,
                             thumbnail: {
-                                url: user.avatarURL({ dynamic: true })
+                                url: user.avatarURL({ dynamic: true }) ?? user.defaultAvatarURL
                             }
                         }]
                     });
