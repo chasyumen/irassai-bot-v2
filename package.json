@@ -25,7 +25,7 @@
   "homepage": "https://github.com/chasyumen/irassai-bot#readme",
   "dependencies": {
     "async": "^3.2.6",
-    "discord.js": "^14.25.1",
+    "discord.js": "^14.26.2",
     "dotenv": "^16.6.1",
     "json-bigint": "^1.0.0",
     "mongoose": "^7.8.7",
